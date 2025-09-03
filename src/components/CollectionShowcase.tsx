@@ -19,41 +19,41 @@ const CollectionShowcase = () => {
         {/* Right Side - Content */}
         <div className="flex items-center section-padding py-20 lg:py-0">
           <div className="max-w-md">
-            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-6">
-              ALLURE PRE-FALL'25
+            <p className="text-sm uppercase tracking-widest text-primary mb-6 font-semibold">
+              VVLEN OVERSIZE'25
             </p>
             
-            <h2 className="heading-large mb-8">
-              Елегантність<br />
-              без компромісів
+            <h2 className="heading-large mb-8 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              Комфорт<br />
+              без границ
             </h2>
 
             <p className="text-lg font-light mb-8 text-muted-foreground leading-relaxed">
-              Відкрийте для себе нову колекцію, де кожна деталь продумана до дрібниць. 
-              Витончені силуети, преміальні тканини та бездоганний крій створюють 
-              неперевершений стиль для сучасної жінки.
+              Откройте для себя коллекцию оверсайз, где каждое платье создано для максимального 
+              комфорта и стиля. Свободные силуэты, качественные ткани и современные решения 
+              для женщин, которые ценят удобство и красоту.
             </p>
 
             <div className="space-y-4 mb-10">
               <div className="flex items-center space-x-4">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-light">Ексклюзивні тканини з Італії</span>
+                <span className="text-sm font-light">Размеры от 42 до 60</span>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-light">Ручна робота майстрів</span>
+                <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                <span className="text-sm font-light">Комфортные оверсайз силуэты</span>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-light">Лімітована колекція</span>
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <span className="text-sm font-light">Доступные цены</span>
               </div>
             </div>
 
             <Button 
               size="lg" 
-              className="elegant-button px-12"
+              className="elegant-button px-12 bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-accent"
             >
-              ДИВИТИСЯ КОЛЕКЦІЮ
+              СМОТРЕТЬ КОЛЛЕКЦИЮ
             </Button>
           </div>
         </div>
@@ -64,27 +64,27 @@ const CollectionShowcase = () => {
         {/* Left Side - Content */}
         <div className="flex items-center section-padding py-20 lg:py-0 order-2 lg:order-1">
           <div className="max-w-md ml-auto">
-            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-6">
-              WEDDING COLLECTION
+            <p className="text-sm uppercase tracking-widest text-secondary mb-6 font-semibold">
+              SPORT COLLECTION
             </p>
             
-            <h2 className="heading-large mb-8">
-              Весільна<br />
-              розкіш
+            <h2 className="heading-large mb-8 bg-gradient-to-r from-secondary via-accent to-primary bg-clip-text text-transparent">
+              Спортивный<br />
+              стиль
             </h2>
 
             <p className="text-lg font-light mb-10 text-muted-foreground leading-relaxed">
-              Створіть незабутній образ для найважливішого дня у вашому житті. 
-              Наша весільна колекція поєднує традиції та сучасність, створюючи 
-              магію моментів, які залишаться в пам'яті назавжди.
+              Создайте идеальный образ для активного образа жизни. 
+              Наша спортивная коллекция сочетает функциональность и стиль, создавая 
+              комфортные решения для тренировок и повседневной жизни.
             </p>
 
             <Button 
               variant="outline" 
               size="lg" 
-              className="elegant-button px-12"
+              className="elegant-button px-12 border-secondary text-secondary hover:bg-secondary hover:text-white"
             >
-              ВЕСІЛЬНА КОЛЕКЦІЯ
+              СПОРТИВНАЯ КОЛЛЕКЦИЯ
             </Button>
           </div>
         </div>

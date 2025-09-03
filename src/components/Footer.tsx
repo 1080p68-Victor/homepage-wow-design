@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div>
-            <h3 className="heading-medium mb-6">GEPUR</h3>
+            <h3 className="heading-medium mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">VVLEN</h3>
             <p className="text-sm font-light text-muted-foreground mb-6 leading-relaxed">
-              Український бренд преміального жіночого одягу, що створює елегантні образи 
-              для сучасних жінок, які цінують стиль та якість.
+              Интернет-магазин женской одежды, специализирующийся на платьях больших размеров, 
+              оверсайз одежде и спортивной одежде для современных женщин.
             </p>
             <div className="flex space-x-4">
               <Button variant="ghost" size="icon" className="hover:text-primary">
@@ -30,7 +30,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-light mb-6 uppercase tracking-wide">Каталог</h4>
             <nav className="space-y-3">
-              {["Новинки", "Сукні", "Жакети", "Брюки", "Аксесуари", "Sale"].map((item) => (
+              {["Платья", "Большие размеры", "Спорт", "Рубашки", "Оверсайз", "Sale"].map((item) => (
                 <a
                   key={item}
                   href="#"
@@ -46,7 +46,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-light mb-6 uppercase tracking-wide">Колекції</h4>
             <nav className="space-y-3">
-              {["Allure Pre-Fall'25", "Odesa Days", "Wedding Collection", "Українські дні", "Look Book"].map((item) => (
+              {["VVLEN Oversize'25", "Спортивная коллекция", "Коктейльные платья", "Большие размеры", "Look Book"].map((item) => (
                 <a
                   key={item}
                   href="#"
@@ -62,7 +62,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-light mb-6 uppercase tracking-wide">Інформація</h4>
             <nav className="space-y-3">
-              {["Про нас", "Доставка та оплата", "Обмін та повернення", "Розмірна сітка", "Контакти", "Політика конфіденційності"].map((item) => (
+              {["О нас", "Доставка и оплата", "Обмен и возврат", "Размерная сетка", "Контакты", "Политика конфиденциальности"].map((item) => (
                 <a
                   key={item}
                   href="#"
@@ -78,9 +78,9 @@ const Footer = () => {
         {/* Newsletter */}
         <div className="border-t border-border pt-16 mb-16">
           <div className="max-w-md mx-auto text-center">
-            <h4 className="heading-medium mb-4">Розсилка новин</h4>
+            <h4 className="heading-medium mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Рассылка новостей</h4>
             <p className="text-sm font-light text-muted-foreground mb-6">
-              Будьте першими, хто дізнається про нові колекції та ексклюзивні пропозиції
+              Будьте первыми, кто узнает о новых коллекциях и эксклюзивных предложениях
             </p>
             <div className="flex gap-2">
               <input
@@ -88,8 +88,8 @@ const Footer = () => {
                 placeholder="Ваш email"
                 className="flex-1 px-4 py-2 border border-input rounded-sm bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
-              <Button className="px-6">
-                Підписатись
+              <Button className="px-6 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent">
+                Подписаться
               </Button>
             </div>
           </div>
@@ -98,10 +98,10 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-xs font-light text-muted-foreground">
-            © 2025 GEPUR. Всі права захищені.
+            © 2025 VVLEN. Все права защищены.
           </p>
           <p className="text-xs font-light text-muted-foreground">
-            Зроблено з любов'ю в Україні
+            Сделано с любовью в Украине
           </p>
         </div>
       </div>

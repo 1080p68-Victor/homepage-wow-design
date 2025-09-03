@@ -4,45 +4,45 @@ const FeaturedProducts = () => {
   const products = [
     {
       id: 1,
-      name: "Чорний двобортний комбінезон",
-      price: "3,200 ₴",
+      name: "Платье оверсайз голубого цвета",
+      price: "999 грн.",
       image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1887&auto=format&fit=crop",
-      category: "НОВИНКИ"
+      category: "ПЛАТЬЯ ОВЕРСАЙЗ"
     },
     {
       id: 2,
-      name: "Елегантна сукня міді",
-      price: "2,800 ₴", 
+      name: "Платье оверсайз розового цвета", 
+      price: "999 грн.", 
       image: "https://images.unsplash.com/photo-1566479179817-c0b76eb4e1aa?q=80&w=1887&auto=format&fit=crop",
-      category: "СУКНІ"
+      category: "ПЛАТЬЯ ОВЕРСАЙЗ"
     },
     {
       id: 3,
-      name: "Твідовий жакет класик",
-      price: "4,100 ₴",
-      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1887&auto=format&fit=crop",
-      category: "ЖАКЕТИ"
+      name: "Спортивное платье",
+      price: "850 грн.",
+      image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?q=80&w=1887&auto=format&fit=crop",
+      category: "СПОРТ"
     },
     {
       id: 4,
-      name: "Сатинова сукня максі",
-      price: "3,600 ₴",
+      name: "Коктейльное платье",
+      price: "1,200 грн.",
       image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=1887&auto=format&fit=crop",
-      category: "ВЕЧІРНІ"
+      category: "КОКТЕЙЛЬНЫЕ"
     },
     {
       id: 5,
-      name: "Широкі штани-кльош",
-      price: "2,400 ₴",
+      name: "Платье больших размеров",
+      price: "1,100 грн.",
       image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1887&auto=format&fit=crop",
-      category: "БРЮКИ"
+      category: "БОЛЬШИЕ РАЗМЕРЫ"
     },
     {
       id: 6,
-      name: "Мінімалістична блуза",
-      price: "1,900 ₴",
+      name: "Рубашка оверсайз",
+      price: "750 грн.",
       image: "https://images.unsplash.com/photo-1564584217132-2271339c8c35?q=80&w=1887&auto=format&fit=crop",
-      category: "БЛУЗИ"
+      category: "РУБАШКИ"
     }
   ];
 
@@ -50,13 +50,13 @@ const FeaturedProducts = () => {
     <section className="py-20 section-padding">
       {/* Section Header */}
       <div className="text-center mb-16">
-        <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4">
+        <p className="text-sm uppercase tracking-widest text-primary mb-4 font-semibold">
           НОВИНКИ
         </p>
-        <h2 className="heading-large mb-6">
-          Останні надходження
+        <h2 className="heading-large mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          Последние поступления
         </h2>
-        <div className="w-24 h-px bg-primary mx-auto"></div>
+        <div className="w-24 h-px bg-gradient-to-r from-primary to-secondary mx-auto"></div>
       </div>
 
       {/* Products Grid */}
@@ -76,26 +76,25 @@ const FeaturedProducts = () => {
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               
               {/* Category Badge */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs uppercase tracking-wide">
+              <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 text-xs uppercase tracking-wide rounded-sm font-semibold">
                 {product.category}
               </div>
 
               {/* Quick View Button */}
               <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <Button 
-                  variant="outline" 
-                  className="w-full bg-white/90 backdrop-blur-sm hover:bg-white"
+                  className="w-full bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-accent transition-all duration-300"
                 >
-                  ШВИДКИЙ ПЕРЕГЛЯД
+                  БЫСТРЫЙ ПРОСМОТР
                 </Button>
               </div>
             </div>
 
             <div className="text-center">
-              <h3 className="heading-medium mb-2 group-hover:text-accent transition-colors duration-300">
+              <h3 className="heading-medium mb-2 group-hover:text-primary transition-colors duration-300">
                 {product.name}
               </h3>
-              <p className="text-lg font-light">{product.price}</p>
+              <p className="text-lg font-semibold text-primary">{product.price}</p>
             </div>
           </div>
         ))}
@@ -104,11 +103,10 @@ const FeaturedProducts = () => {
       {/* View All Button */}
       <div className="text-center">
         <Button 
-          variant="outline" 
           size="lg"
-          className="elegant-button px-12"
+          className="elegant-button px-12 bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-accent"
         >
-          ПЕРЕГЛЯНУТИ ВСІ ТОВАРИ
+          ПОСМОТРЕТЬ ВСЕ ТОВАРЫ
         </Button>
       </div>
     </section>

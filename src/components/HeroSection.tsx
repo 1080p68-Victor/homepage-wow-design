@@ -7,22 +7,22 @@ const HeroSection = () => {
 
   const slides = [
     {
-      title: "ALLURE",
-      subtitle: "FALL-WINTER '25",
-      image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1887&auto=format&fit=crop",
-      description: "Елегантність у кожній деталі"
-    },
-    {
-      title: "ELEGANCE",
+      title: "VVLEN",
       subtitle: "НОВАЯ КОЛЛЕКЦИЯ",
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop",
-      description: "Вишуканість та стиль"
+      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1920&auto=format&fit=crop",
+      description: "Стиль для кожної жінки"
     },
     {
-      title: "STYLE",
-      subtitle: "ВЕСНА 2025",
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1920&auto=format&fit=crop",
-      description: "Мода без компромісів"
+      title: "OVERSIZE",
+      subtitle: "ПЛАТЬЯ ОВЕРСАЙЗ", 
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop",
+      description: "Комфорт і елегантність"
+    },
+    {
+      title: "SPORT",
+      subtitle: "СПОРТИВНАЯ ОДЕЖДА",
+      image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?q=80&w=1920&auto=format&fit=crop",
+      description: "Активний стиль життя"
     }
   ];
 
@@ -56,7 +56,7 @@ const HeroSection = () => {
             className="full-screen bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/20 to-accent/30" />
           </div>
         </div>
       ))}
@@ -74,11 +74,10 @@ const HeroSection = () => {
             {slides[currentSlide].description}
           </p>
           <Button 
-            variant="outline" 
             size="lg"
-            className="elegant-button bg-white/10 border-white/30 text-white hover:bg-white hover:text-black backdrop-blur-sm"
+            className="elegant-button bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-accent shadow-lg transition-all duration-300"
           >
-            ПЕРЕГЛЯНУТИ КОЛЕКЦІЮ
+            СМОТРЕТЬ КОЛЛЕКЦИЮ
           </Button>
         </div>
       </div>

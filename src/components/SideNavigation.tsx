@@ -6,18 +6,17 @@ const SideNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    "НОВИНКИ",
-    "ВСІ ТОВАРИ", 
-    "СУКНІ",
-    "АКСЕСУАРИ ТА СУМКИ",
-    "ALLURE PRE-FALL'25",
-    "ODESA DAYS",
-    "ДУША",
-    "WEDDING COLLECTION",
-    "SALE",
-    "УКРАЇНСЬКА ДНИ",
-    "LOOK BOOK",
-    "КОЛЕКЦІЇ"
+    "КАТАЛОГ",
+    "ПЛАТЬЯ", 
+    "БОЛЬШИЕ РАЗМЕРЫ",
+    "СПОРТ",
+    "РУБАШКИ",
+    "ОВЕРСАЙЗ",
+    "КОКТЕЙЛЬНЫЕ",
+    "РАСПРОДАЖА",
+    "БЛОГ",
+    "О НАС",
+    "КОНТАКТЫ"
   ];
 
   return (
@@ -25,7 +24,7 @@ const SideNavigation = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-6 left-6 z-50 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+        className="fixed top-6 left-6 z-50 bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm hover:from-primary/30 hover:to-secondary/30 transition-all duration-300 border border-primary/20"
         onClick={() => setIsOpen(true)}
       >
         <Menu className="h-6 w-6" />
@@ -47,18 +46,24 @@ const SideNavigation = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="mb-8"
+            className="mb-8 hover:text-primary"
             onClick={() => setIsOpen(false)}
           >
             <X className="h-6 w-6" />
           </Button>
 
+          {/* VVLEN Logo */}
+          <div className="mb-12">
+            <h1 className="text-2xl font-bold tracking-[0.1em] bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">VVLEN</h1>
+          </div>
+
+          {/* Navigation Links */}
           <nav className="space-y-6">
             {menuItems.map((item, index) => (
               <a
                 key={index}
                 href="#"
-                className="block text-sm font-light tracking-wide hover:text-accent-foreground transition-colors duration-300 uppercase"
+                className="block text-sm font-light tracking-wide hover:text-primary transition-colors duration-300 uppercase hover:translate-x-2 transform"
                 onClick={() => setIsOpen(false)}
               >
                 {item}
