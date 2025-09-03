@@ -18,6 +18,23 @@ export default {
 			}
 		},
 		extend: {
+			fontWeight: {
+				'extralight': '200',
+				'light': '300',
+			},
+			letterSpacing: {
+				'wider': '0.1em',
+				'widest': '0.2em',
+			},
+			backgroundImage: {
+				'elegant-gradient': 'var(--gradient-elegant)',
+			},
+			boxShadow: {
+				'elegant': 'var(--shadow-elegant)',
+			},
+			transitionTimingFunction: {
+				'elegant': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
