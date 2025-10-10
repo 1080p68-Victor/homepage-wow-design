@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedProducts = () => {
+  const navigate = useNavigate();
+  
   const products = [
     {
       id: 1,
@@ -65,6 +68,7 @@ const FeaturedProducts = () => {
           <div
             key={product.id}
             className="group cursor-pointer"
+            onClick={() => navigate(`/product/${product.id}`)}
           >
             <div className="relative overflow-hidden mb-4 bg-muted">
               <img
