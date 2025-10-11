@@ -70,11 +70,11 @@ const FeaturedProducts = () => {
             className="group cursor-pointer"
             onClick={() => navigate(`/product/${product.id}`)}
           >
-            <div className="relative overflow-hidden mb-4 bg-muted">
+            <div className="relative overflow-hidden mb-4 bg-muted aspect-[3/4]">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
