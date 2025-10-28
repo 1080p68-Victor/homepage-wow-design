@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const SideNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    "КАТАЛОГ",
-    "ПЛАТЬЯ", 
-    "БОЛЬШИЕ РАЗМЕРЫ",
-    "СПОРТ",
-    "РУБАШКИ",
-    "ОВЕРСАЙЗ",
-    "КОКТЕЙЛЬНЫЕ",
-    "РАСПРОДАЖА",
-    "БЛОГ",
-    "О НАС",
-    "КОНТАКТЫ"
+    { label: "КАТАЛОГ", href: "#" },
+    { label: "ПЛАТЬЯ", href: "#" },
+    { label: "БОЛЬШИЕ РАЗМЕРЫ", href: "#" },
+    { label: "СПОРТ", href: "#" },
+    { label: "РУБАШКИ", href: "#" },
+    { label: "ОВЕРСАЙЗ", href: "#" },
+    { label: "КОКТЕЙЛЬНЫЕ", href: "#" },
+    { label: "РАСПРОДАЖА", href: "#" },
+    { label: "ИНФОРМАЦИЯ", href: "/info" },
+    { label: "БЛОГ", href: "#" },
+    { label: "КОНТАКТЫ", href: "/info" }
   ];
 
   return (
@@ -60,14 +61,25 @@ const SideNavigation = () => {
           {/* Navigation Links */}
           <nav className="space-y-6">
             {menuItems.map((item, index) => (
-              <a
-                key={index}
-                href="#"
-                className="block text-sm font-light tracking-wide hover:text-primary transition-colors duration-300 uppercase hover:translate-x-2 transform"
-                onClick={() => setIsOpen(false)}
-              >
-                {item}
-              </a>
+              item.href.startsWith('/') ? (
+                <Link
+                  key={index}
+                  to={item.href}
+                  className="block text-sm font-light tracking-wide hover:text-primary transition-colors duration-300 uppercase hover:translate-x-2 transform"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="block text-sm font-light tracking-wide hover:text-primary transition-colors duration-300 uppercase hover:translate-x-2 transform"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </nav>
         </div>

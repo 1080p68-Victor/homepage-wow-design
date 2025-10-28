@@ -1,5 +1,6 @@
 import { Instagram, Facebook, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -62,15 +63,42 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-light mb-6 uppercase tracking-wide">Інформація</h4>
             <nav className="space-y-3">
-              {["О нас", "Доставка и оплата", "Обмен и возврат", "Размерная сетка", "Контакты", "Политика конфиденциальности"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
-                >
-                  {item}
-                </a>
-              ))}
+              <Link
+                to="/info"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                О фирме
+              </Link>
+              <Link
+                to="/info"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Доставка и оплата
+              </Link>
+              <Link
+                to="/info"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Обмен и возврат
+              </Link>
+              <Link
+                to="/info"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Выбор размера
+              </Link>
+              <Link
+                to="/info"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Контакты
+              </Link>
+              <a
+                href="#"
+                className="block text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Политика конфиденциальности
+              </a>
             </nav>
           </div>
         </div>
