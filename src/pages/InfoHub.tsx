@@ -1,9 +1,67 @@
 import { Link } from "react-router-dom";
-import { Package, CreditCard, RotateCcw, MapPin, Building2, Ruler, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+interface InfoSection {
+  _id: string;
+  slug: string;
+  icon: string;
+  order: number;
+  color: string;
+  url: string;
+  titleKey: string;
+  descriptionKey: string;
+  seoTitleKey: string;
+}
+
+interface TranslationValues {
+  ua: string;
+  ru: string;
+}
+
+interface Translation {
+  values: TranslationValues;
+}
+
+interface ApiResponse {
+  success: boolean;
+  data: InfoSection[];
+}
+
+interface TranslationResponse {
+  data: Translation[];
+}
+
+const API_BASE = "http://158.220.113.112:5001/api";
+
+const fetchInfoSections = async (): Promise<InfoSection[]> => {
+  const response = await fetch(`${API_BASE}/info-sections?active=true`);
+  if (!response.ok) throw new Error("Failed to fetch info sections");
+  const data: ApiResponse = await response.json();
+  return data.data || [];
+};
+
+const fetchTranslation = async (key: string): Promise<string> => {
+  try {
+    const response = await fetch(`${API_BASE}/translations?key=${key}`);
+    if (!response.ok) return key;
+    const data: TranslationResponse = await response.json();
+    return data.data?.[0]?.values?.ua || key;
+  } catch {
+    return key;
+  }
+};
 
 const InfoHub = () => {
+  const { data: sections = [], isLoading, error } = useQuery({
+    queryKey: ["infoSections"],
+    queryFn: fetchInfoSections,
+    staleTime: 60 * 1000, // 1 minute
+    refetchOnWindowFocus: false,
+  });
+
   useEffect(() => {
     document.title = "Інформація | VVLEN";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -11,51 +69,6 @@ const InfoHub = () => {
       metaDescription.setAttribute("content", "Доставка, оплата, повернення та інша корисна інформація про VVLEN");
     }
   }, []);
-
-  const sections = [
-    { 
-      id: "delivery", 
-      label: "Доставка", 
-      icon: Package,
-      description: "Нова Пошта, кур'єр та міжнародна доставка",
-      color: "from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20"
-    },
-    { 
-      id: "payment", 
-      label: "Оплата", 
-      icon: CreditCard,
-      description: "Онлайн, накладений платіж, банківський переказ",
-      color: "from-purple-500/10 to-purple-600/10 hover:from-purple-500/20 hover:to-purple-600/20"
-    },
-    { 
-      id: "returns", 
-      label: "Повернення", 
-      icon: RotateCcw,
-      description: "Умови повернення та обміну товару",
-      color: "from-amber-500/10 to-amber-600/10 hover:from-amber-500/20 hover:to-amber-600/20"
-    },
-    { 
-      id: "contacts", 
-      label: "Контакти", 
-      icon: MapPin,
-      description: "Телефон, email, соціальні мережі та адреса",
-      color: "from-green-500/10 to-green-600/10 hover:from-green-500/20 hover:to-green-600/20"
-    },
-    { 
-      id: "about", 
-      label: "Про бренд", 
-      icon: Building2,
-      description: "Історія, цінності та переваги VVLEN",
-      color: "from-pink-500/10 to-pink-600/10 hover:from-pink-500/20 hover:to-pink-600/20"
-    },
-    { 
-      id: "sizes", 
-      label: "Розміри", 
-      icon: Ruler,
-      description: "Таблиця розмірів та як зняти мірки",
-      color: "from-cyan-500/10 to-cyan-600/10 hover:from-cyan-500/20 hover:to-cyan-600/20"
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,35 +106,27 @@ const InfoHub = () => {
 
           {/* Info Cards Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sections.map((section) => {
-              const Icon = section.icon;
-              return (
-                <Link
-                  key={section.id}
-                  to={`/info/${section.id}`}
-                  className={`group relative p-8 rounded-2xl bg-gradient-to-br ${section.color} border border-primary/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-primary/30`}
-                >
-                  <div className="flex flex-col h-full">
-                    <div className="mb-4 p-3 bg-background/50 rounded-xl w-fit">
-                      <Icon className="w-8 h-8 text-primary" />
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-3 text-foreground">
-                      {section.label}
-                    </h3>
-                    
-                    <p className="text-muted-foreground mb-6 flex-grow">
-                      {section.description}
-                    </p>
-                    
-                    <div className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                      <span>Детальніше</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+            {isLoading && (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground">Завантаження...</p>
+              </div>
+            )}
+            
+            {error && (
+              <div className="col-span-full text-center py-12">
+                <p className="text-destructive">Помилка завантаження даних</p>
+              </div>
+            )}
+            
+            {!isLoading && !error && sections.length === 0 && (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground">Розділи відсутні</p>
+              </div>
+            )}
+            
+            {!isLoading && sections.length > 0 && sections.map((section) => (
+              <SectionCard key={section._id} section={section} />
+            ))}
           </div>
 
           {/* CTA Section */}
@@ -145,6 +150,46 @@ const InfoHub = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const SectionCard = ({ section }: { section: InfoSection }) => {
+  const { data: title } = useQuery({
+    queryKey: ["translation", section.titleKey],
+    queryFn: () => fetchTranslation(section.titleKey),
+    staleTime: 60 * 1000,
+  });
+
+  const { data: description } = useQuery({
+    queryKey: ["translation", section.descriptionKey],
+    queryFn: () => fetchTranslation(section.descriptionKey),
+    staleTime: 60 * 1000,
+  });
+
+  return (
+    <Link
+      to={section.url}
+      className={`group relative p-8 rounded-2xl bg-gradient-to-br ${section.color} border border-primary/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-primary/30`}
+    >
+      <div className="flex flex-col h-full">
+        <div className="mb-4 p-3 bg-background/50 rounded-xl w-fit">
+          <span className="text-4xl">{section.icon}</span>
+        </div>
+        
+        <h3 className="text-2xl font-bold mb-3 text-foreground">
+          {title || section.titleKey}
+        </h3>
+        
+        <p className="text-muted-foreground mb-6 flex-grow">
+          {description || section.descriptionKey}
+        </p>
+        
+        <div className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
+          <span>Детальніше</span>
+          <ArrowRight className="w-4 h-4" />
+        </div>
+      </div>
+    </Link>
   );
 };
 
