@@ -14,6 +14,8 @@ interface InfoSection {
   titleKey: string;
   descriptionKey: string;
   seoTitleKey: string;
+  title?: string;
+  description?: string;
 }
 
 interface TranslationValues {
@@ -36,11 +38,98 @@ interface TranslationResponse {
 
 const API_BASE = "http://158.220.113.112:5001/api";
 
+// Fallback статичні дані
+const FALLBACK_SECTIONS: InfoSection[] = [
+  {
+    _id: "delivery",
+    slug: "delivery",
+    icon: "📦",
+    order: 1,
+    color: "from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20",
+    url: "/info/delivery",
+    titleKey: "info_delivery_title",
+    descriptionKey: "info_delivery_description",
+    seoTitleKey: "info_delivery_seo_title",
+    title: "Доставка",
+    description: "Нова Пошта, кур'єр та міжнародна доставка"
+  },
+  {
+    _id: "payment",
+    slug: "payment",
+    icon: "💳",
+    order: 2,
+    color: "from-purple-500/10 to-purple-600/10 hover:from-purple-500/20 hover:to-purple-600/20",
+    url: "/info/payment",
+    titleKey: "info_payment_title",
+    descriptionKey: "info_payment_description",
+    seoTitleKey: "info_payment_seo_title",
+    title: "Оплата",
+    description: "Онлайн, накладений платіж, банківський переказ"
+  },
+  {
+    _id: "returns",
+    slug: "returns",
+    icon: "🔄",
+    order: 3,
+    color: "from-amber-500/10 to-amber-600/10 hover:from-amber-500/20 hover:to-amber-600/20",
+    url: "/info/returns",
+    titleKey: "info_returns_title",
+    descriptionKey: "info_returns_description",
+    seoTitleKey: "info_returns_seo_title",
+    title: "Повернення",
+    description: "Умови повернення та обміну товару"
+  },
+  {
+    _id: "contacts",
+    slug: "contacts",
+    icon: "📍",
+    order: 4,
+    color: "from-green-500/10 to-green-600/10 hover:from-green-500/20 hover:to-green-600/20",
+    url: "/info/contacts",
+    titleKey: "info_contacts_title",
+    descriptionKey: "info_contacts_description",
+    seoTitleKey: "info_contacts_seo_title",
+    title: "Контакти",
+    description: "Телефон, email, соціальні мережі та адреса"
+  },
+  {
+    _id: "about",
+    slug: "about",
+    icon: "🏢",
+    order: 5,
+    color: "from-pink-500/10 to-pink-600/10 hover:from-pink-500/20 hover:to-pink-600/20",
+    url: "/info/about",
+    titleKey: "info_about_title",
+    descriptionKey: "info_about_description",
+    seoTitleKey: "info_about_seo_title",
+    title: "Про бренд",
+    description: "Історія, цінності та переваги VVLEN"
+  },
+  {
+    _id: "sizes",
+    slug: "sizes",
+    icon: "📏",
+    order: 6,
+    color: "from-cyan-500/10 to-cyan-600/10 hover:from-cyan-500/20 hover:to-cyan-600/20",
+    url: "/info/sizes",
+    titleKey: "info_sizes_title",
+    descriptionKey: "info_sizes_description",
+    seoTitleKey: "info_sizes_seo_title",
+    title: "Розміри",
+    description: "Таблиця розмірів та як зняти мірки"
+  }
+];
+
 const fetchInfoSections = async (): Promise<InfoSection[]> => {
-  const response = await fetch(`${API_BASE}/info-sections?active=true`);
-  if (!response.ok) throw new Error("Failed to fetch info sections");
-  const data: ApiResponse = await response.json();
-  return data.data || [];
+  try {
+    const response = await fetch(`${API_BASE}/info-sections?active=true`);
+    if (!response.ok) throw new Error("Failed to fetch info sections");
+    const data: ApiResponse = await response.json();
+    return data.data || FALLBACK_SECTIONS;
+  } catch (error) {
+    console.warn("API недоступний, використовуємо fallback дані:", error);
+    return FALLBACK_SECTIONS;
+  }
 };
 
 const fetchTranslation = async (key: string): Promise<string> => {
@@ -55,11 +144,12 @@ const fetchTranslation = async (key: string): Promise<string> => {
 };
 
 const InfoHub = () => {
-  const { data: sections = [], isLoading, error } = useQuery({
+  const { data: sections = FALLBACK_SECTIONS, isLoading } = useQuery({
     queryKey: ["infoSections"],
     queryFn: fetchInfoSections,
-    staleTime: 60 * 1000, // 1 minute
+    staleTime: 60 * 1000,
     refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   useEffect(() => {
@@ -106,27 +196,19 @@ const InfoHub = () => {
 
           {/* Info Cards Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {isLoading && (
+            {isLoading ? (
               <div className="col-span-full text-center py-12">
                 <p className="text-muted-foreground">Завантаження...</p>
               </div>
-            )}
-            
-            {error && (
-              <div className="col-span-full text-center py-12">
-                <p className="text-destructive">Помилка завантаження даних</p>
-              </div>
-            )}
-            
-            {!isLoading && !error && sections.length === 0 && (
+            ) : sections.length === 0 ? (
               <div className="col-span-full text-center py-12">
                 <p className="text-muted-foreground">Розділи відсутні</p>
               </div>
+            ) : (
+              sections.map((section) => (
+                <SectionCard key={section._id} section={section} />
+              ))
             )}
-            
-            {!isLoading && sections.length > 0 && sections.map((section) => (
-              <SectionCard key={section._id} section={section} />
-            ))}
           </div>
 
           {/* CTA Section */}
@@ -154,17 +236,28 @@ const InfoHub = () => {
 };
 
 const SectionCard = ({ section }: { section: InfoSection }) => {
-  const { data: title } = useQuery({
+  // Використовуємо переклади з API тільки якщо немає fallback значень
+  const shouldFetchTitle = !section.title;
+  const shouldFetchDescription = !section.description;
+
+  const { data: titleFromApi } = useQuery({
     queryKey: ["translation", section.titleKey],
     queryFn: () => fetchTranslation(section.titleKey),
     staleTime: 60 * 1000,
+    enabled: shouldFetchTitle,
+    retry: 0,
   });
 
-  const { data: description } = useQuery({
+  const { data: descriptionFromApi } = useQuery({
     queryKey: ["translation", section.descriptionKey],
     queryFn: () => fetchTranslation(section.descriptionKey),
     staleTime: 60 * 1000,
+    enabled: shouldFetchDescription,
+    retry: 0,
   });
+
+  const title = section.title || titleFromApi || section.titleKey;
+  const description = section.description || descriptionFromApi || section.descriptionKey;
 
   return (
     <Link
@@ -177,11 +270,11 @@ const SectionCard = ({ section }: { section: InfoSection }) => {
         </div>
         
         <h3 className="text-2xl font-bold mb-3 text-foreground">
-          {title || section.titleKey}
+          {title}
         </h3>
         
         <p className="text-muted-foreground mb-6 flex-grow">
-          {description || section.descriptionKey}
+          {description}
         </p>
         
         <div className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
