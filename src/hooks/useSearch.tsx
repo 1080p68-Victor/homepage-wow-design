@@ -1,0 +1,32 @@
+import { useState, useCallback, createContext, useContext, ReactNode } from "react";
+
+interface SearchContextType {
+  isSearchOpen: boolean;
+  openSearch: () => void;
+  closeSearch: () => void;
+  toggleSearch: () => void;
+}
+
+const SearchContext = createContext<SearchContextType | undefined>(undefined);
+
+export function SearchProvider({ children }: { children: ReactNode }) {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const openSearch = useCallback(() => setIsSearchOpen(true), []);
+  const closeSearch = useCallback(() => setIsSearchOpen(false), []);
+  const toggleSearch = useCallback(() => setIsSearchOpen(prev => !prev), []);
+
+  return (
+    <SearchContext.Provider value={{ isSearchOpen, openSearch, closeSearch, toggleSearch }}>
+      {children}
+    </SearchContext.Provider>
+  );
+}
+
+export function useSearch() {
+  const context = useContext(SearchContext);
+  if (!context) {
+    throw new Error("useSearch must be used within SearchProvider");
+  }
+  return context;
+}

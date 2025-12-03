@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { SearchModal } from "@/components/search/SearchModal";
 
 const SideNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const menuItems = [
     { label: "КАТАЛОГ", href: "#" },
@@ -22,14 +24,28 @@ const SideNavigation = () => {
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed top-6 left-6 z-50 bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm hover:from-primary/30 hover:to-secondary/30 transition-all duration-300 border border-primary/20"
-        onClick={() => setIsOpen(true)}
-      >
-        <Menu className="h-6 w-6" />
-      </Button>
+      {/* Top Navigation Buttons */}
+      <div className="fixed top-6 left-6 z-50 flex gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm hover:from-primary/30 hover:to-secondary/30 transition-all duration-300 border border-primary/20"
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm hover:from-primary/30 hover:to-secondary/30 transition-all duration-300 border border-primary/20"
+          onClick={() => setSearchOpen(true)}
+        >
+          <Search className="h-5 w-5" />
+        </Button>
+      </div>
+
+      {/* Search Modal */}
+      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
 
       {/* Overlay */}
       {isOpen && (
