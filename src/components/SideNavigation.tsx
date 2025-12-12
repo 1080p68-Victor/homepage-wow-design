@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { SearchModal } from "@/components/search/SearchModal";
@@ -42,6 +42,15 @@ const SideNavigation = () => {
         >
           <Search className="h-5 w-5" />
         </Button>
+        <Link to="/register">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-sm hover:from-primary/30 hover:to-secondary/30 transition-all duration-300 border border-primary/20"
+          >
+            <UserPlus className="h-5 w-5" />
+          </Button>
+        </Link>
       </div>
 
       {/* Search Modal */}

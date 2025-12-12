@@ -10,6 +10,7 @@ import InfoHub from "./pages/InfoHub";
 import InfoArticle from "./pages/InfoArticle";
 import Search from "./pages/Search";
 import Checkout from "./pages/Checkout";
+import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/info/:section" element={<InfoArticle />} />
             <Route path="/search" element={<Search />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/register" element={<Register />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
