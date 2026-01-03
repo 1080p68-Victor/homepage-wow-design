@@ -17,9 +17,13 @@ function generateOrderNumber(): string {
   return `VV-${timestamp}-${random}`;
 }
 
-export default function Checkout() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [orderNumber, setOrderNumber] = useState('');
+interface CheckoutProps {
+  initialStep?: number;
+}
+
+export default function Checkout({ initialStep = 1 }: CheckoutProps) {
+  const [currentStep, setCurrentStep] = useState(initialStep);
+  const [orderNumber, setOrderNumber] = useState(initialStep === 4 ? 'VV-PREVIEW-001' : '');
   const [isLoading, setIsLoading] = useState(false);
   const { items, clearCart } = useCart();
 

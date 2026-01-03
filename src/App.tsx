@@ -23,13 +23,14 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
+        <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/info" element={<InfoHub />} />
             <Route path="/info/:section" element={<InfoArticle />} />
             <Route path="/search" element={<Search />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success" element={<Checkout initialStep={4} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/email-preview" element={<EmailPreview />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
