@@ -12,6 +12,7 @@ import Search from "./pages/Search";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
 import EmailPreview from "./pages/EmailPreview";
+import SubscriptionPreview from "./pages/SubscriptionPreview";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/order-success" element={<Checkout initialStep={4} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/email-preview" element={<EmailPreview />} />
+            <Route path="/subscription-success" element={<SubscriptionPreview />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
