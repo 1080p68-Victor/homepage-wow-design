@@ -19,7 +19,8 @@ const SideNavigation = () => {
     { label: "РАСПРОДАЖА", href: "#" },
     { label: "ИНФОРМАЦИЯ", href: "/info" },
     { label: "БЛОГ", href: "#" },
-    { label: "КОНТАКТЫ", href: "/info" }
+    { label: "КОНТАКТЫ", href: "/info" },
+    { label: "404 ПРЕВЬЮ", href: "/404-preview" }
   ];
 
   return (
