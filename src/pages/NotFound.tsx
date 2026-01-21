@@ -21,7 +21,7 @@ const NotFound = () => {
         <div
           className="full-screen bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: `url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop)` 
+            backgroundImage: `url(https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop)` 
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/20 to-accent/30" />
